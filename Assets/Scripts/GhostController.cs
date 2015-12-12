@@ -11,8 +11,8 @@ public class GhostController : MonoBehaviour {
 	public AudioClip jumpClip;
 	public AudioClip dodgeClip;
 
-	private AudioSource audio;
-
+	private AudioSource audioSource;
+	private bool waiting;
 	private Vector3 originPos;
 	private Vector3 destinationPos;
 	private GameObject target;
@@ -22,7 +22,7 @@ public class GhostController : MonoBehaviour {
 
 	void Awake ()
 	{
-		audio = this.GetComponent<AudioSource> ();
+		audioSource = this.GetComponent<AudioSource> ();
 		if (travelingMarks != null && travelingMarks.Count >= 2) {
 
 			transform.position = new Vector3 (travelingMarks [0].transform.position.x, travelingMarks [0].transform.position.y, 0);
@@ -54,20 +54,32 @@ public class GhostController : MonoBehaviour {
 		
 		if (step > 1) {
 
-			StartCoroutine("PlaySoundWait");
-		
+			if(!waiting)
+			{
+				waiting=true;
+			PlaySound();
+			StartCoroutine("Wait");
+			}
 		}
 	}
 
-	IEnumerator PlaySoundWait()
+	void PlaySound()
 	{
+		Debug.Log ("PlaySound");
 		if (target.tag == "Attack") {
-			audio.clip=attackClip;
+			audioSource.clip=attackClip;
+			audioSource.Play();
 		} else if (target.tag == "Jump") {
-			audio.clip = jumpClip;
+			audioSource.clip = jumpClip;
+			audioSource.Play();
 		} else if (target.tag == "Dodge") {
-			audio.clip= dodgeClip;
+			audioSource.clip= dodgeClip;
+			audioSource.Play();
 		}
+	}
+	IEnumerator Wait()
+	{
+
 
 		yield return new WaitForSeconds(1.0f);
 
@@ -77,6 +89,7 @@ public class GhostController : MonoBehaviour {
 			destinationPos = new Vector3 (target.transform.position.x, target.transform.position.y, 0);
 			markToTravel++;
 			step = 0;
+			waiting=false;
 		}
 	}
 }
