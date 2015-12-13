@@ -942,9 +942,13 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 404966, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -7.46
+      value: -5.66
       objectReference: {fileID: 0}
     - target: {fileID: 404966, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
       propertyPath: m_LocalPosition.y
@@ -973,6 +977,38 @@ Prefab:
     - target: {fileID: 404966, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].value
+      value: 0.00000010430813
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].time
+      value: 0.5083333
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].value
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].value
+      value: 0.00000010430813
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: waitAfterJump
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 164078, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: m_Name
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
@@ -1090,6 +1126,10 @@ Prefab:
     - target: {fileID: 440552, guid: dec3a70e5064840a7bd77b6a78139a07, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11413670, guid: dec3a70e5064840a7bd77b6a78139a07, type: 2}
+      propertyPath: ghostWaitTime
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dec3a70e5064840a7bd77b6a78139a07, type: 2}

@@ -999,6 +999,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 404966, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
       propertyPath: m_LocalPosition.x
       value: -7.46
@@ -1030,6 +1034,38 @@ Prefab:
     - target: {fileID: 404966, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: waitAfterJump
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].value
+      value: 0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].time
+      value: 0.50416666
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11405972, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[2].value
+      value: 0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 164078, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
+      propertyPath: m_Name
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6cc957cbe8ca24fe893754eaefd5eb26, type: 2}
