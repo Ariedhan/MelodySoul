@@ -1771,15 +1771,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced2d80745d5c4f9f8d8dea62229b3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitAfterJump: 0
+  waitAfterJump: 1
   waitForAttack: 0
   waitForSwipe: 0
   jumpCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - time: 0
+      value: 0.015449345
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 0.48265916
+      value: 1.0065202
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0.015449345
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!212 &21208778
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -3076,7 +3091,55 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waitAfterJump
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].value
+      value: 0.015449345
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].value
+      value: 1.0065202
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].time
+      value: 0.48265916
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 144508}

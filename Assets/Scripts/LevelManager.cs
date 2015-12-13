@@ -55,13 +55,13 @@ public class LevelManager : MonoBehaviour {
 		yield return new WaitForSeconds (1.0f);
 		Debug.Log ("hello");
 		ghost.SendMessage ("StartMovement",levelSpeed);
-		player.SendMessage ("StartMovement", levelSpeed);
+		//player.SendMessage ("StartMovement", levelSpeed);
 		cam.SendMessage ("ChangeToFollow", ghost);
 	}
 
 	public void Failed()
 	{
-
+		waitForInput = false;
 	}
 
 
