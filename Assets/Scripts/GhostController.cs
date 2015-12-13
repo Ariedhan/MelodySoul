@@ -20,10 +20,16 @@ public class GhostController : MonoBehaviour {
 	private float step = 0;
 	private bool ghostMove;
 	private GameObject levelController;
-	
+	private float currentWaitTime;
 
 
+	public void changeWaitTime(float time)
+	{
 
+
+		currentWaitTime = time;
+		Debug.Log (currentWaitTime);
+	}
 
 	void Awake ()
 	{
@@ -36,23 +42,22 @@ public class GhostController : MonoBehaviour {
 			destinationPos = new Vector3 (target.transform.position.x, target.transform.position.y, 0);
 			markToTravel++;
 		} else {
-			//shotPosition = this.transform.position;
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
-
 		levelController = GameObject.Find ("LevelController");
 	}
 
-	public void StartMovement()
+	public void StartMovement(float speed)
 	{
 		ghostMove = true;
+		travelSpeed = speed;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (ghostMove) {
 			TravelTroughMarks ();
 		}
@@ -70,7 +75,8 @@ public class GhostController : MonoBehaviour {
 			{
 				waiting=true;
 			PlaySound();
-			StartCoroutine("Wait");
+				Debug.Log (currentWaitTime);
+			StartCoroutine("Wait",currentWaitTime);
 			}
 		}
 	}
@@ -92,11 +98,10 @@ public class GhostController : MonoBehaviour {
 		
 		}
 	}
-	IEnumerator Wait()
+	IEnumerator Wait(float waitTime)
 	{
 
-
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(waitTime);
 
 		if (markToTravel < travelingMarks.Count) {
 			originPos = new Vector3 (transform.position.x, transform.position.y, 0);
@@ -106,5 +111,13 @@ public class GhostController : MonoBehaviour {
 			step = 0;
 			waiting=false;
 		}
+	}
+
+	public void SkipGhost()
+	{
+
+		travelSpeed = 100;
+		currentWaitTime = 0.0f;
+		audioSource.volume = 0.0f;
 	}
 }
