@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour {
 	private GameObject levelController;
 	private bool waitInput;
 	private bool moving;
-	public float waitAfferJump;
-
+	public float waitAfterJump;
+	private float currentVelocity;
 	public AnimationCurve jumpCurve;
 
 	public enum markType{
@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour {
 	public void StartMovement(float speed)
 	{
 		moving = true;
+		currentVelocity = speed;
 		rb.velocity = Vector2.right * speed;
 	}
 
@@ -98,14 +99,14 @@ public class PlayerController : MonoBehaviour {
 		}
 		rb.velocity = Vector2.zero;
 		transform.position = new Vector3 (transform.position.x, initY, transform.position.z);
-		StartCoroutine ("ContinueAfterJump", waitAfferJump);
+		StartCoroutine ("ContinueAfterJump", waitAfterJump);
 	}
 
 	public void Success()
 	{
 		Debug.Log ("success");
 		if (currentMark == markType.jump) {
-			StartCoroutine(Jump(1.5f));
+			StartCoroutine(Jump(1.75f));
 
 		} else if (currentMark == markType.dodge) {
 		} else if (currentMark == markType.attack) {
@@ -114,9 +115,11 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	IEnumerator ContinueAfterJump()
+	IEnumerator ContinueAfterJump(float time)
 	{
-		yield return new WaitForSeconds (waitAfterJump);
+		yield return new WaitForSeconds (time);
+		rb.velocity = Vector2.right * currentVelocity;
+
 	}
 
 	void Fail()
