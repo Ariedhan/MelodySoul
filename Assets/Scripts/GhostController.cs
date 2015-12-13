@@ -18,6 +18,11 @@ public class GhostController : MonoBehaviour {
 	private GameObject target;
 	private int markToTravel = 1;
 	private float step = 0;
+	private bool ghostMove;
+	private GameObject levelController;
+	
+
+
 
 
 	void Awake ()
@@ -37,13 +42,20 @@ public class GhostController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		TravelTroughMarks ();
-	
+
+		levelController = GameObject.Find ("LevelController");
+	}
+
+	public void StartMovement()
+	{
+		ghostMove = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		TravelTroughMarks ();
+		if (ghostMove) {
+			TravelTroughMarks ();
+		}
 	
 	}
 	
@@ -67,14 +79,17 @@ public class GhostController : MonoBehaviour {
 	{
 		Debug.Log ("PlaySound");
 		if (target.tag == "Attack") {
-			audioSource.clip=attackClip;
-			audioSource.Play();
+			audioSource.clip = attackClip;
+			audioSource.Play ();
 		} else if (target.tag == "Jump") {
 			audioSource.clip = jumpClip;
-			audioSource.Play();
+			audioSource.Play ();
 		} else if (target.tag == "Dodge") {
-			audioSource.clip= dodgeClip;
-			audioSource.Play();
+			audioSource.clip = dodgeClip;
+			audioSource.Play ();
+		} else if (target.tag == "EndMark") {
+			levelController.SendMessage("GhostEnd");
+		
 		}
 	}
 	IEnumerator Wait()
