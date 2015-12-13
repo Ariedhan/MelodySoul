@@ -9,12 +9,18 @@ public class PlayerController : MonoBehaviour {
 	private bool waitInput;
 	private bool moving;
 
+	public enum markType{
+		attack, jump, dodge, end, start
+		
+	}
+
+	markType currentMark;
+
 	// Use this for initialization
 	void Start () {
 
 		rb = this.GetComponent<Rigidbody2D> ();
 		levelController = GameObject.Find ("LevelController");
-		//StartMovement (5f);
 	}
 	
 	// Update is called once per frame
@@ -58,15 +64,36 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
+		if (other.tag == "Jump") {
+			currrentMark = markType.jump;
+		} else if (other.tag == "Attack") {
+			currrentMark = markType.attack;
+		} else if (other.tag == "Dodge") {
+			currrentMark = markType.dodge;
+		} 
 		levelController.SendMessage ("UpdateMark", other.tag);
+
 	}
 
 	void OnTriggerExit2D(Collider2D other)
 	{
 
-		//Debug.Log (other.tag);
 		levelController.SendMessage ("OutOfMark");
 	}
 
+	void Sucesss()
+	{
+		if (currentMark == markType.jump) {
+		} else if (currentMark == markType.dodge) {
+		} else if (currentMark == markType.attack) {
+		
+		}
+
+	}
+
+	void Fail()
+	{
+
+	}
 
 }
