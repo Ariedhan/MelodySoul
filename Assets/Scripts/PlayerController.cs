@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
 
 	private Rigidbody2D rb;
 	private GameObject levelController;
+	private bool waitInput;
+	private bool moving;
 
 	// Use this for initialization
 	void Start () {
@@ -17,17 +19,53 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (moving) {
+			ReadInput ();
+		}
+	}
+	void ReadInput()
+	{
+		if (Input.GetKeyDown (KeyCode.LeftArrow) && Input.GetKeyDown (KeyCode.RightArrow)) {
+			levelController.SendMessage("PlayerInput", 0);
+		} else if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+				if(Input.GetKey(KeyCode.RightArrow) && (Input.GetKey(KeyCode.LeftArrow)))
+			   {
+				levelController.SendMessage("PlayerInput", 0);
+			}
+			else {
+				levelController.SendMessage("PlayerInput", 3);
+			}
+		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+			if(Input.GetKey(KeyCode.RightArrow) && (Input.GetKey(KeyCode.LeftArrow)))
+			{
+				levelController.SendMessage("PlayerInput", 0);
+			}
+			else {
+				levelController.SendMessage("PlayerInput", 1);
+			}
+		}
+	}
+	public void StartMovement(float speed)
+	{
+		moving = true;
+		rb.velocity = Vector2.right * speed;
 	}
 
-	public void StartMovement()
+	public void StopMovement()
 	{
-		rb.velocity = Vector2.right * 5f;
+		rb.velocity = Vector2.zero;
 	}
 
-	public void LevelFailed()
+	void OnTriggerEnter2D(Collider2D other)
 	{
-		levelController.SendMessage ("Failed");
+		levelController.SendMessage ("UpdateMark", other.tag);
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+
+		//Debug.Log (other.tag);
+		levelController.SendMessage ("OutOfMark");
 	}
 
 
