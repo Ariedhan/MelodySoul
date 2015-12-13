@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour {
 		cam = GameObject.Find ("Main Camera");
 		fader = GameObject.Find ("Fader");
 		StartCoroutine ("StartGhost");
+
 		ghost.SendMessage ("changeWaitTime", ghostWaitTime);
 
 	
@@ -54,6 +55,7 @@ public class LevelManager : MonoBehaviour {
 		yield return new WaitForSeconds (1.0f);
 		Debug.Log ("hello");
 		ghost.SendMessage ("StartMovement",levelSpeed);
+		player.SendMessage ("StartMovement", levelSpeed);
 		cam.SendMessage ("ChangeToFollow", ghost);
 	}
 
@@ -74,6 +76,7 @@ public class LevelManager : MonoBehaviour {
 	public void PlayerInput(markType input)
 	{
 		if (waitForInput) {
+
 			playerMark=input;
 			CompareInput();
 		} else {
@@ -101,14 +104,15 @@ public class LevelManager : MonoBehaviour {
 
 	private void CompareInput()
 	{
+		Debug.Log(playerMark + " " + currrentMark + "sdfsfsad");
 		if (playerMark == currrentMark) {
 			Debug.Log("exito");
 			//Player Play Animation
+			player.SendMessage("Success");
 			waitForInput=false;
 		}
 		else
 			{
-			Debug.Log("Failed");
 			Failed ();
 			waitForInput=false;
 			}
@@ -156,6 +160,6 @@ public class LevelManager : MonoBehaviour {
 	public void OutOfMark()
 	{
 		Failed ();
-		Debug.Log("Failed");
+		Debug.Log("Failed out of mark");
 	}
 }
