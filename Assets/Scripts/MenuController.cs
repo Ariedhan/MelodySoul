@@ -89,6 +89,6 @@ public class MenuController : MonoBehaviour
 
 		fade.CrossFade (false);
 		yield return new WaitForSeconds (1.0f);
-		SceneManager.LoadScene ("prototipoGhost");
+		SceneManager.LoadScene ("Level01");
 	}
 }
