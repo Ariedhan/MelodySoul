@@ -9,9 +9,11 @@ public class PlayerController : MonoBehaviour {
 	private bool waitInput;
 	private bool moving;
 	public float waitAfterJump;
+	public float waitForAttack;
+	public float waitForSwipe;
 	private float currentVelocity;
 	public AnimationCurve jumpCurve;
-
+	private Animator animator;
 	public enum markType{
 		attack, jump, dodge, end, start
 		
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 
 		rb = this.GetComponent<Rigidbody2D> ();
 		levelController = GameObject.Find ("LevelController");
+		animator = this.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -60,11 +63,14 @@ public class PlayerController : MonoBehaviour {
 		moving = true;
 		currentVelocity = speed;
 		rb.velocity = Vector2.right * speed;
+		animator.SetTrigger ("Player_Running");
 	}
 
 	public void StopMovement()
 	{
 		rb.velocity = Vector2.zero;
+		animator.SetTrigger ("Player_Idle");
+
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -86,6 +92,8 @@ public class PlayerController : MonoBehaviour {
 		levelController.SendMessage ("OutOfMark");
 	}
 
+
+
 	IEnumerator Jump (float animationTime) {
 		float elapsedTime = 0;
 		float initY = transform.position.y;
@@ -101,6 +109,7 @@ public class PlayerController : MonoBehaviour {
 		transform.position = new Vector3 (transform.position.x, initY, transform.position.z);
 		StartCoroutine ("ContinueAfterJump", waitAfterJump);
 	}
+	
 
 	public void Success()
 	{
@@ -109,15 +118,27 @@ public class PlayerController : MonoBehaviour {
 			StartCoroutine(Jump(1.75f));
 
 		} else if (currentMark == markType.dodge) {
+			animator.SetTrigger ("Player_Running");
+			StartCoroutine("WaitStopMovement",waitForSwipe);
+
 		} else if (currentMark == markType.attack) {
-		
+			animator.SetTrigger ("Player_Attack");
+			StartCoroutine("WaitStopMovement",waitForAttack);
+
+			
 		}
 
 	}
+	IEnumerator WaitStopMovement(float time)
+	{
+		yield return new WaitForSeconds (time);
+	}
+
 
 	IEnumerator ContinueAfterJump(float time)
 	{
 		yield return new WaitForSeconds (time);
+		animator.SetTrigger ("Player_Dodge");
 		rb.velocity = Vector2.right * currentVelocity;
 
 	}
