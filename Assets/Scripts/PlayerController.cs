@@ -8,13 +8,16 @@ public class PlayerController : MonoBehaviour {
 	private GameObject levelController;
 	private bool waitInput;
 	private bool moving;
+	public float waitAfferJump;
+
+	public AnimationCurve jumpCurve;
 
 	public enum markType{
 		attack, jump, dodge, end, start
 		
 	}
 
-	markType currentMark;
+	private markType currentMark;
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour {
 				levelController.SendMessage("PlayerInput", 3);
 			}
 		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+
 			if(Input.GetKey(KeyCode.RightArrow) && (Input.GetKey(KeyCode.LeftArrow)))
 			{
 				levelController.SendMessage("PlayerInput", 0);
@@ -65,11 +69,11 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag == "Jump") {
-			currrentMark = markType.jump;
+			currentMark = markType.jump;
 		} else if (other.tag == "Attack") {
-			currrentMark = markType.attack;
+			currentMark = markType.attack;
 		} else if (other.tag == "Dodge") {
-			currrentMark = markType.dodge;
+			currentMark = markType.dodge;
 		} 
 		levelController.SendMessage ("UpdateMark", other.tag);
 
@@ -81,14 +85,38 @@ public class PlayerController : MonoBehaviour {
 		levelController.SendMessage ("OutOfMark");
 	}
 
-	void Sucesss()
+	IEnumerator Jump (float animationTime) {
+		float elapsedTime = 0;
+		float initY = transform.position.y;
+		while (elapsedTime < animationTime) {
+			transform.position = new Vector3(
+				transform.position.x,
+				Mathf.Lerp(initY, initY + 2, jumpCurve.Evaluate(elapsedTime/animationTime)),
+				transform.position.z);
+			elapsedTime += Time.deltaTime;
+			yield return 0;
+		}
+		rb.velocity = Vector2.zero;
+		transform.position = new Vector3 (transform.position.x, initY, transform.position.z);
+		StartCoroutine ("ContinueAfterJump", waitAfferJump);
+	}
+
+	public void Success()
 	{
+		Debug.Log ("success");
 		if (currentMark == markType.jump) {
+			StartCoroutine(Jump(1.5f));
+
 		} else if (currentMark == markType.dodge) {
 		} else if (currentMark == markType.attack) {
 		
 		}
 
+	}
+
+	IEnumerator ContinueAfterJump()
+	{
+		yield return new WaitForSeconds (waitAfterJump);
 	}
 
 	void Fail()
