@@ -62,6 +62,7 @@ public class LevelManager : MonoBehaviour {
 	public void Failed()
 	{
 		waitForInput = false;
+
 	}
 
 

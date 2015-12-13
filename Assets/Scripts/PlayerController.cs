@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour {
 		if (other.tag == "Jump") {
 			currentMark = markType.jump;
 		} else if (other.tag == "Attack") {
+
 			currentMark = markType.attack;
 		} else if (other.tag == "Dodge") {
 			currentMark = markType.dodge;
