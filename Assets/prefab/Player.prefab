@@ -1772,6 +1772,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitAfterJump: 0
+  waitForAttack: 0
+  waitForSwipe: 0
   jumpCurve:
     serializedVersion: 2
     m_Curve: []
