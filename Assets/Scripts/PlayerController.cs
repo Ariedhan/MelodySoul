@@ -102,6 +102,17 @@ public class PlayerController : MonoBehaviour {
 		StartCoroutine ("ContinueAfterJump", waitAfterJump);
 	}
 
+	IEnumerator Dodge()
+	{
+		yield return 0;
+
+	}
+
+	IEnumerator Attack()
+	{
+		yield return 0;
+	}
+
 	public void Success()
 	{
 		Debug.Log ("success");
@@ -109,7 +120,9 @@ public class PlayerController : MonoBehaviour {
 			StartCoroutine(Jump(1.75f));
 
 		} else if (currentMark == markType.dodge) {
+			StartCoroutine (Dodge());
 		} else if (currentMark == markType.attack) {
+			StartCoroutine (Attack());
 		
 		}
 
