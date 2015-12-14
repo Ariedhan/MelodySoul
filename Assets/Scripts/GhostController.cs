@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GhostController : MonoBehaviour {
-
-
+public class GhostController : MonoBehaviour 
+{
 	public List<GameObject> travelingMarks;
 	public float travelSpeed = 25;
 	public AudioClip attackClip;
@@ -25,8 +24,6 @@ public class GhostController : MonoBehaviour {
 
 	public void changeWaitTime(float time)
 	{
-
-
 		currentWaitTime = time;
 		Debug.Log (currentWaitTime);
 	}
@@ -35,7 +32,7 @@ public class GhostController : MonoBehaviour {
 	{
 		audioSource = this.GetComponent<AudioSource> ();
 		if (travelingMarks != null && travelingMarks.Count >= 2) {
-
+			Debug.Log ("travelling count "+travelingMarks.Count);
 			transform.position = new Vector3 (travelingMarks [0].transform.position.x, travelingMarks [0].transform.position.y, 0);
 			originPos = new Vector3 (transform.position.x, transform.position.y, 0);
 			target = travelingMarks [1];
@@ -55,28 +52,28 @@ public class GhostController : MonoBehaviour {
 		ghostMove = true;
 		travelSpeed = speed;
 	}
-	
+
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (ghostMove) {
 			TravelTroughMarks ();
 		}
-	
+
 	}
-	
+
 	private void TravelTroughMarks ()
 	{
 		transform.position = Vector3.Lerp (originPos, destinationPos, step);
 		step += (travelSpeed * Time.deltaTime) / (originPos - destinationPos).magnitude;
-		
+
 		if (step > 1) {
 
 			if(!waiting)
 			{
 				waiting=true;
-			PlaySound();
+				PlaySound();
 				Debug.Log (currentWaitTime);
-			StartCoroutine("Wait",currentWaitTime);
+				StartCoroutine("Wait",currentWaitTime);
 			}
 		}
 	}
@@ -95,7 +92,7 @@ public class GhostController : MonoBehaviour {
 			audioSource.Play ();
 		} else if (target.tag == "EndMark") {
 			levelController.SendMessage("GhostEnd");
-		
+
 		}
 	}
 	IEnumerator Wait(float waitTime)
