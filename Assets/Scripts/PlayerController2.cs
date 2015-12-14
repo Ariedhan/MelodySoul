@@ -150,8 +150,8 @@ public class PlayerController2 : MonoBehaviour
 		audio.Play ();
 		anim.SetTrigger (dodgeTriggerHash);
 		//ChangeToSynchronizing (waitForSwipe);
-		yield return 0;
-
+		yield return new WaitForSeconds(1f);
+		ChangeToWaiting ();
 	}
 
 	IEnumerator AttackCoroutine()
