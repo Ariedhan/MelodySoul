@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
 				levelController.SendMessage("PlayerInput", 0);
 			}
 			else {
-				levelController.SendMessage("PlayerInput", 3);
+				levelController.SendMessage("PlayerInput", 2);
 			}
 		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
 
@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour {
 		if (other.tag == "Jump") {
 			currentMark = markType.jump;
 		} else if (other.tag == "Attack") {
+
 			currentMark = markType.attack;
 		} else if (other.tag == "Dodge") {
 			currentMark = markType.dodge;
@@ -115,10 +116,11 @@ public class PlayerController : MonoBehaviour {
 	{
 		Debug.Log ("success");
 		if (currentMark == markType.jump) {
-			StartCoroutine(Jump(1.75f));
+			animator.SetTrigger ("Player_Jump");
+			StartCoroutine(Jump(1.25f));
 
 		} else if (currentMark == markType.dodge) {
-			animator.SetTrigger ("Player_Running");
+			animator.SetTrigger ("Player_Dodge");
 			StartCoroutine("WaitStopMovement",waitForSwipe);
 
 		} else if (currentMark == markType.attack) {
@@ -131,15 +133,20 @@ public class PlayerController : MonoBehaviour {
 	}
 	IEnumerator WaitStopMovement(float time)
 	{
+
 		yield return new WaitForSeconds (time);
+		StopMovement ();
+		StartCoroutine ("ContinueAfterJump", waitAfterJump);
+
 	}
 
 
 	IEnumerator ContinueAfterJump(float time)
 	{
 		yield return new WaitForSeconds (time);
-		animator.SetTrigger ("Player_Dodge");
+
 		rb.velocity = Vector2.right * currentVelocity;
+		animator.SetTrigger ("Player_Running");
 
 	}
 
