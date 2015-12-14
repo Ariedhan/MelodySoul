@@ -538,7 +538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f637dcc03e3be4740bafe972a88ef53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
 --- !u!4 &1830744750
 Transform:
   m_ObjectHideFlags: 0
@@ -654,7 +653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f637dcc03e3be4740bafe972a88ef53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
 --- !u!61 &2060990438
 BoxCollider2D:
   m_ObjectHideFlags: 0
