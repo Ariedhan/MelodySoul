@@ -22,8 +22,7 @@ public class CameraMovement : MonoBehaviour
 		t = 0f;
 
 		while (t < 1)
-		{
-			Debug.Log (state);
+		{ 
 			if (state != CameraState.goTo)
 				break;
 			Vector2 aux = new Vector2 (0, 0);
