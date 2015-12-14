@@ -149,9 +149,13 @@ public class PlayerController2 : MonoBehaviour
 		audio.clip = dodgeClip;
 		audio.Play ();
 		anim.SetTrigger (dodgeTriggerHash);
-		//ChangeToSynchronizing (waitForSwipe);
-		yield return new WaitForSeconds(1f);
-		ChangeToWaiting ();
+		//
+		yield return new WaitForSeconds(1);
+		state = PlayerStates.waiting;
+		rb.velocity = Vector2.zero;
+		anim.SetTrigger (idleTriggerHash);
+		yield return new WaitForSeconds (waitForSwipe);
+		ChangeToMoving (currentVelocity);
 	}
 
 	IEnumerator AttackCoroutine()

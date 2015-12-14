@@ -62,7 +62,6 @@ public class LevelManager2 : MonoBehaviour
 		yield return new WaitForSeconds (1.0f);
 		state = levelStates.ghostTurn;
 		StartCoroutine (GhostTurnCoroutine());
-
  
 	}
 
